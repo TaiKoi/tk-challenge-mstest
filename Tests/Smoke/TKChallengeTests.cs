@@ -17,12 +17,12 @@ namespace TKTest
         {
             driver = new ChromeDriver();
         }
-        /*
-                [ClassCleanup]
-                public static void ClassCleanup()
-                {
-                    driver.Close();
-                }*/
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+            driver.Close();
+        }
 
         [TestMethod]
         public void AddEmployee()
