@@ -18,24 +18,22 @@ namespace TKTest
             driver = new ChromeDriver();
         }
 
-        [ClassCleanup]
+        /*[ClassCleanup]
         public static void ClassCleanup()
         {
             driver.Close();
-        }
+        }*/
 
         [TestMethod]
         public void AddEmployee()
         {
             driver.Url = "file:///C:/Users/smadd/OneDrive/Desktop/Paylocity%20QA%20Interview%20Challenge/login.html";
             driver.Manage().Window.Maximize();
-            driver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            driver.GetElement(LoginPage.Username).SendKeys("testUser");
-            driver.GetElement(LoginPage.Password).SendKeys("Test1234");
-            driver.GetElement(LoginPage.LoginButton).Click();
+            driver.Login();
             driver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
             //Assert.IsTrue(driver.FindElement(BenefitsDashboardPage.AddEmployeeModal).Displayed);
-            Assert.IsTrue(driver.FindElement(By.Id("[id='addEmployeeModal']")).Displayed);
+            driver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
+            Assert.IsTrue(driver.FindElement(By.Id("addEmployeeModal")).Displayed);
         }
 
         [TestMethod]
@@ -45,10 +43,7 @@ namespace TKTest
 
             driver.Url = "file:///C:/Users/smadd/OneDrive/Desktop/Paylocity%20QA%20Interview%20Challenge/login.html";
             driver.Manage().Window.Maximize();
-            driver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            driver.GetElement(LoginPage.Username).SendKeys("testUser");
-            driver.GetElement(LoginPage.Password).SendKeys("Test1234");
-            driver.GetElement(LoginPage.LoginButton).Click();
+            driver.Login();
             Assert.AreEqual("file:///C:/Users/smadd/OneDrive/Desktop/Paylocity%20QA%20Interview%20Challenge/home.html?username=testUser", driver.Url);
         }
 
