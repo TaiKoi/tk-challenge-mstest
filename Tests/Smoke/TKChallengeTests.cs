@@ -1,62 +1,56 @@
-﻿using TK_Challenge.Pages;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Collections.Generic;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Edge;
 using TK_Challenge;
+using TK_Challenge.Pages;
 
 namespace TKTest
 {
     [TestClass]
-    public class TKTests
+    public class TKChallengeTests
     {
-        public static IWebDriver driver;
+        public static IWebDriver chromeDriver, firefoxDriver, edgeDriver;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext test)
         {
-            driver = new ChromeDriver();
+            var options = new ChromeOptions();
+            options.AddArguments("headed"); // Change argument to "headless" to run without the browser
+            chromeDriver = new ChromeDriver(options);
+            //firefoxDriver = new FirefoxDriver();
+            //edgeDriver = new EdgeDriver();
         }
 
-        /*[ClassCleanup]
+        [ClassCleanup]
         public static void ClassCleanup()
         {
-            driver.Close();
-        }*/
+            chromeDriver.Close();
+            //firefoxDriver.Close();
+            //edgeDriver.Close();
+        }
 
         [TestMethod]
         public void AddEmployee()
         {
-            driver.Url = "file:///C:/Users/smadd/OneDrive/Desktop/Paylocity%20QA%20Interview%20Challenge/login.html";
-            driver.Manage().Window.Maximize();
-            driver.Login();
-            driver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
-            //Assert.IsTrue(driver.FindElement(BenefitsDashboardPage.AddEmployeeModal).Displayed);
-            driver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
-            Assert.IsTrue(driver.FindElement(By.Id("addEmployeeModal")).Displayed);
+            chromeDriver.Url = URLConstants.LoginURL;
+            chromeDriver.Manage().Window.Maximize();
+            chromeDriver.Login();
+            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
+            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
         }
 
         [TestMethod]
         public void Login()
         {
-            // TODO: Put all elements into an array and assert that the array contains 7 elements
-
-            driver.Url = "file:///C:/Users/smadd/OneDrive/Desktop/Paylocity%20QA%20Interview%20Challenge/login.html";
-            driver.Manage().Window.Maximize();
-            driver.Login();
-            Assert.AreEqual("file:///C:/Users/smadd/OneDrive/Desktop/Paylocity%20QA%20Interview%20Challenge/home.html?username=testUser", driver.Url);
+            chromeDriver.Url = URLConstants.LoginURL;
+            chromeDriver.Manage().Window.Maximize();
+            chromeDriver.Login();
+            Assert.AreEqual(URLConstants.DashboardURL, chromeDriver.Url);
         }
 
-        /*[TestMethod]
-        public void ConnectEmptyForm()
-        {
-            driver.Url = "file:///C:/Users/smadd/OneDrive/Desktop/Paylocity%20QA%20Interview%20Challenge/login.html";
-            driver.Manage().Window.Maximize();
-            driver.GetElement(LocityHomePage.RequestADemoButton).Click();
-            driver.GetElement(ConnectPage.FirstNameField).WaitForDisplayed();
-            driver.GetElement(ConnectPage.ContactMeButton).Click();
-            driver.GetElement(ConnectPage.FirstNameField).WaitForDisplayed();
-            Assert.IsTrue(driver.GetElement(ConnectPage.ValidMessageFirstName).Displayed);
-        }*/
+
     }
 }
