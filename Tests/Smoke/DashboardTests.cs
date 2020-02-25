@@ -38,7 +38,7 @@ namespace TK_Challenge
             chromeDriver.Login();
             chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
             chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle), "Add Employee & His dependents"); // Not just His and capitalze dependents
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Text, "Add Employee & Their Dependents"); // Not just His and capitalze dependents
         }
 
         [TestMethod]
