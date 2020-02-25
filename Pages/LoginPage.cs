@@ -4,8 +4,8 @@ namespace TK_Challenge.Pages
 {
     class LoginPage
     {
-        public static string UsernameField = "[id='form-username']";
-        public static string PasswordField = "[id='form-password']";
+        public static string UsernameField = "[id='formUsername']";
+        public static string PasswordField = "[id='formPassword']";
         public static string LoginButton = "[id='btnLogin']";
     }
 }

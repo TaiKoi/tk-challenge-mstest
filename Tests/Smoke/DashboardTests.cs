@@ -32,6 +32,16 @@ namespace TK_Challenge
         }
 
         [TestMethod]
+        public void VerifyAddEmployeeModalTitle()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.Login();
+            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
+            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle), "Add Employee & His dependents"); // Not just His and capitalze dependents
+        }
+
+        [TestMethod]
         public void VerifyModalOpensWhenAddEmployeeButtonIsClicked()
         {
             chromeDriver.Url = Navigation.LoginURL;
