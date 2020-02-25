@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TK Challenge", "tk-challenge-mstest.csproj", "{6E198564-02A7-4CD0-9881-A36BBDD3B155}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TK Challenge", "TK Challenge.csproj", "{341C5DD7-AB6E-4828-81CB-FEC9846AD339}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6E198564-02A7-4CD0-9881-A36BBDD3B155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E198564-02A7-4CD0-9881-A36BBDD3B155}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E198564-02A7-4CD0-9881-A36BBDD3B155}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E198564-02A7-4CD0-9881-A36BBDD3B155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{341C5DD7-AB6E-4828-81CB-FEC9846AD339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{341C5DD7-AB6E-4828-81CB-FEC9846AD339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{341C5DD7-AB6E-4828-81CB-FEC9846AD339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{341C5DD7-AB6E-4828-81CB-FEC9846AD339}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D2ED6BB0-69B9-4D21-9A79-26EFC86CAF6C}
+		SolutionGuid = {6824A5B0-5844-4791-BBFE-6816ADB21D63}
 	EndGlobalSection
 EndGlobal
