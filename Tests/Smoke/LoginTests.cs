@@ -3,13 +3,12 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
-using TK_Challenge;
 using TK_Challenge.Pages;
 
-namespace TKTest
+namespace TK_Challenge
 {
     [TestClass]
-    public class TKChallengeTests
+    public class LoginTests
     {
         public static IWebDriver chromeDriver, firefoxDriver, edgeDriver;
 
@@ -21,6 +20,7 @@ namespace TKTest
             chromeDriver = new ChromeDriver(options);
             //firefoxDriver = new FirefoxDriver();
             //edgeDriver = new EdgeDriver();
+            chromeDriver.Manage().Window.Maximize();
         }
 
         [ClassCleanup]
@@ -32,23 +32,11 @@ namespace TKTest
         }
 
         [TestMethod]
-        public void AddEmployee()
+        public void VerifyLoginUserWhenCredentialsAreValid()
         {
-            chromeDriver.Url = URLConstants.LoginURL;
-            chromeDriver.Manage().Window.Maximize();
+            chromeDriver.Url = Navigation.LoginURL;  
             chromeDriver.Login();
-            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
-            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
-        }
-
-        [TestMethod]
-        public void Login()
-        {
-            chromeDriver.Url = URLConstants.LoginURL;
-            chromeDriver.Manage().Window.Maximize();
-            chromeDriver.Login();
-            Assert.AreEqual(URLConstants.DashboardURL, chromeDriver.Url);
+            Assert.AreEqual(Navigation.DashboardURL, chromeDriver.Url);
         }
 
 
