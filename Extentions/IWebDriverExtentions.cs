@@ -25,13 +25,5 @@ namespace TK_Challenge.Pages
             throw new Exception("TK Element Not Found");
 
         }
-
-        public static void Login(this IWebDriver driver)
-        {
-            driver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            driver.GetElement(LoginPage.UsernameField).SendKeys("testUser");
-            driver.GetElement(LoginPage.PasswordField).SendKeys("Test1234");
-            driver.GetElement(LoginPage.LoginButton).Click();
-        }
     }
 }

@@ -32,6 +32,24 @@ namespace TK_Challenge
         }
 
         [TestMethod]
+        public void VerifyEditButton()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.Login();
+            chromeDriver.ClickAddEmployeeButton();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+        }
+
+        /*[TestMethod]
+        public void VerifyDeleteButton()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.Login();
+            chromeDriver.ClickAddEmployeeButton();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
+        }*/
+
+        [TestMethod]
         public void VerifyAddEmployeeModalTitle()
         {
             chromeDriver.Url = Navigation.LoginURL;
@@ -46,17 +64,16 @@ namespace TK_Challenge
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.Login();
-            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
-            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
+            chromeDriver.ClickAddEmployeeButton();
             Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
         }
 
         [TestMethod]
-        public void VerifyBannerIsDisplayed()
+        public void VerifyBannerIsDisplayed() // Verifies page title "Benefits Dashboard" is displayed
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.Login();
-            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
+            chromeDriver.ClickAddEmployeeButton();
             Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
         }
     }
