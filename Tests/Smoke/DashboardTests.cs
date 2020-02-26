@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
 using TK_Challenge.Pages;
+using System;
 
 namespace TK_Challenge
 {
@@ -69,7 +70,7 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyBannerIsDisplayed() // Verifies page title "Benefits Dashboard" is displayed
+        public void VerifyJumbotronBannerIsDisplayed() // Verifies page title "Benefits Dashboard" is displayed
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();

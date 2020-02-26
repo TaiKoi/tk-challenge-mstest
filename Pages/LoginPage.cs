@@ -7,7 +7,9 @@ namespace TK_Challenge.Pages
         // Page Elements
         public static string LoginCard = "[id='loginCard']";
         public static string LocityLogo = "[id='paylocityLogo']";
+        public static string UsernameText = "[id='usernameText']";
         public static string UsernameField = "[id='formUsername']";
+        public static string PasswordText = "[id='passwordText']";
         public static string PasswordField = "[id='formPassword']";
         public static string LoginButton = "[id='btnLogin']";
         public static string CopyrightFooter = "[id='footer']";

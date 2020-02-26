@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
 using TK_Challenge.Pages;
+using System;
 
 namespace TK_Challenge
 {
@@ -55,23 +56,23 @@ namespace TK_Challenge
             Assert.IsTrue(chromeDriver.FindElement(By.Id("paylocityLogo")).Displayed);
         }
 
-        // Not sure how to select Username text yet...
-        /*[TestMethod]
+        [TestMethod]
         public void VerifyUsernameTextIsDisplayedCorrectly()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("")).Displayed);
-        }*/
+            //Console.WriteLine(chromeDriver.GetElement(LoginPage.UsernameText).Text);
+            Assert.AreEqual(chromeDriver.GetElement(LoginPage.UsernameText).Text, "Username");
+        }
 
-        // Not sure how to select Password text yet...
-        /*[TestMethod]
+        [TestMethod]
         public void VerifyPasswordTextIsDisplayedCorrectly()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("")).Displayed);
-        }*/
+            //Console.WriteLine(chromeDriver.GetElement(LoginPage.PasswordText).Text);
+            Assert.AreEqual(chromeDriver.GetElement(LoginPage.PasswordText).Text, "Password");
+        }
 
         [TestMethod]
         public void VerifyPaylocityFooterIsDisplayed()
