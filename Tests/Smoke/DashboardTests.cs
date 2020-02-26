@@ -35,7 +35,7 @@ namespace TK_Challenge
         public void VerifyEditButton()
         {
             chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.Login();
+            chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
             Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
         }
@@ -53,7 +53,7 @@ namespace TK_Challenge
         public void VerifyAddEmployeeModalTitle()
         {
             chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.Login();
+            chromeDriver.ValidLogin();
             chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
             chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
             Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Text, "Add Employee & Their Dependents"); // Not just His and capitalze dependents
@@ -63,7 +63,7 @@ namespace TK_Challenge
         public void VerifyModalOpensWhenAddEmployeeButtonIsClicked()
         {
             chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.Login();
+            chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
             Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
         }
@@ -72,7 +72,7 @@ namespace TK_Challenge
         public void VerifyBannerIsDisplayed() // Verifies page title "Benefits Dashboard" is displayed
         {
             chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.Login();
+            chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
             Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
         }
