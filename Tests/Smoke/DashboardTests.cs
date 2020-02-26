@@ -55,9 +55,38 @@ namespace TK_Challenge
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
-            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeButton).Click();
-            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
+            chromeDriver.ClickAddEmployeeButton();
             Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Text, "Add Employee & Their Dependents"); // Not just His and capitalze dependents
+        }
+
+        [TestMethod]
+        public void VerifyModalFirstNameTextIsCorrect() // Verifies
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameTextModal).Text);
+            //Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameTextModal).Text, "First Name");
+        }
+
+        [TestMethod]
+        public void VerifyModalLastNameTextIsCorrect() // Verifies
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.LastNameTextModal).Text);
+            //Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.LastNameTextModal).Text, "Last Name");
+        }
+
+        [TestMethod]
+        public void VerifyModalDependentsTextIsCorrect() // Verifies
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text);
+            //Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text, "Dependents");
         }
 
         [TestMethod]
@@ -76,6 +105,15 @@ namespace TK_Challenge
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
             Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyJumbotronBannerTextIsCorrect() // Verifies page title "Benefits Dashboard" is displayed
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            //Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.BannerText).Text);
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.BannerText).Text, "Benefits Dashboard");
         }
     }
 }

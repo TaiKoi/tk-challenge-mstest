@@ -22,7 +22,7 @@ namespace TK_Challenge.Pages
                 }
             }
 
-            throw new Exception("TK Element Not Found");
+            throw new Exception("Element Not Found");
 
         }
     }
