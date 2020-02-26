@@ -5,8 +5,8 @@ namespace TK_Challenge.Pages
     public static class BenefitsDashboardPage
     {
         // Page Elements
-        public static string BannerText = "[id='headerText']";
-        public static string Banner = "[id='header']";
+        public static string JumboBannerText = "[id='headerText']";
+        public static string JumboBanner = "[id='header']";
         public static string AddEmployeeButton = "[id='btnAddEmployee']";
         public static string AddEmployeeModal = "[id='addEmployeeModal']";
         public static string ModalTitle = "[id='modalTitle']";

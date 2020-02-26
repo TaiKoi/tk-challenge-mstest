@@ -38,7 +38,7 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+            Assert.IsTrue(chromeDriver.FindElement(By.Id(BenefitsDashboardPage.AddEmployeeModal)).Displayed);
         }
 
         /*[TestMethod]
@@ -95,7 +95,7 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+            Assert.IsTrue(chromeDriver.FindElement(By.Id(BenefitsDashboardPage.AddEmployeeModal)).Displayed);
         }
 
         [TestMethod]
@@ -104,7 +104,7 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
+            Assert.IsTrue(chromeDriver.FindElement(By.Id(BenefitsDashboardPage.JumboBanner)).Displayed);
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             //Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.BannerText).Text);
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.BannerText).Text, "Benefits Dashboard");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.JumboBannerText).Text, "Benefits Dashboard");
         }
     }
 }
