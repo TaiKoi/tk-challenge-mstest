@@ -33,12 +33,37 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyEditButton()
+        public void VerifyEditButtonOpensModal()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id(BenefitsDashboardPage.AddEmployeeModal)).Displayed);
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyEditButtonOpensModalWithCorrectEmployeeInformation()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyEditButtonExists()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnEdit")).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyDeleteButtonExists()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnDelete")).Displayed);
         }
 
         /*[TestMethod]
@@ -49,6 +74,14 @@ namespace TK_Challenge
             chromeDriver.ClickAddEmployeeButton();
             Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
         }*/
+
+        [TestMethod]
+        public void VerifyEmployeeTableExists()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("employee-table")).Displayed);
+        }
 
         [TestMethod]
         public void VerifyAddEmployeeModalTitle()
@@ -66,7 +99,7 @@ namespace TK_Challenge
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
             Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameTextModal).Text);
-            //Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameTextModal).Text, "First Name");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameTextModal).Text, "First Name:");
         }
 
         [TestMethod]
@@ -76,7 +109,7 @@ namespace TK_Challenge
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
             Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.LastNameTextModal).Text);
-            //Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.LastNameTextModal).Text, "Last Name");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.LastNameTextModal).Text, "Last Name:");
         }
 
         [TestMethod]
@@ -86,7 +119,7 @@ namespace TK_Challenge
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
             Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text);
-            //Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text, "Dependents");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text, "Dependents:");
         }
 
         [TestMethod]
@@ -95,7 +128,7 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id(BenefitsDashboardPage.AddEmployeeModal)).Displayed);
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
         }
 
         [TestMethod]
@@ -104,7 +137,7 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id(BenefitsDashboardPage.JumboBanner)).Displayed);
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
         }
 
         [TestMethod]
