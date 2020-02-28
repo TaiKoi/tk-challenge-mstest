@@ -17,7 +17,10 @@ namespace TK_Challenge.Pages
         public static string FirstNameTextModal = "[id='firstNameTextModal']";
         public static string LastNameTextModal = "[id='lastNameTextModal']";
         public static string DependentsTextModal = "[id='dependentsTextModal']";
-        
+        public static string SubmitButton = "[id='btnSubmitModal']";
+        public static string CloseButton = "[id='btnCloseModal']";
+        public static string CloseXButton = "[id='btnCloseModalX']";
+
         // Create a table object or interface to store all the records from the employee table. Then 
 
         // Page Actions
@@ -27,10 +30,9 @@ namespace TK_Challenge.Pages
             driver.GetElement(AddEmployeeModal).WaitForDisplayed();
         }
 
-        public static void ClickEditButton(this IWebDriver driver, string firstName, string lastName, int dependents)
+        public static void ClickEditButton(this IWebDriver driver)
         {
             //driver.ExecuteJavaScript<string>("return employee.js");
-            firstName = driver.GetElement(EmployeeTable);
 
             driver.GetElement(EditButton).Click();
             driver.GetElement(AddEmployeeModal).WaitForDisplayed();
@@ -38,8 +40,18 @@ namespace TK_Challenge.Pages
         public static void ClickDeleteButton(this IWebDriver driver)
         {
             driver.GetElement(DeleteButton).Click();
-            driver.GetElement(AddEmployeeModal).WaitForDisplayed();
         }
 
+        public static void ClickCloseModalButton(this IWebDriver driver)
+        {
+            driver.GetElement(CloseButton).Click();
+            //driver.GetElement(JumboBanner).WaitForDisplayed();
+        }
+
+        public static void ClickCloseModalXButton(this IWebDriver driver)
+        {
+            driver.GetElement(CloseXButton).Click();
+            //driver.GetElement(JumboBanner).WaitForDisplayed();
+        }
     }
 }

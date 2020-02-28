@@ -32,6 +32,8 @@ namespace TK_Challenge
             //edgeDriver.Close();
         }
 
+        // Landing Tests
+
         [TestMethod]
         public void VerifyEditButtonOpensModal()
         {
@@ -84,12 +86,42 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyAddEmployeeModalTitle()
+        public void VerifyJumbotronBannerIsDisplayed() // Verifies page title "Benefits Dashboard" is displayed
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Text, "Add Employee & Their Dependents"); // Not just His and capitalze dependents
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyJumbotronBannerTextIsCorrect() // Verifies page title "Benefits Dashboard" is displayed
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            //Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.BannerText).Text);
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.JumboBannerText).Text, "Benefits Dashboard");
+        }
+
+        [TestMethod]
+        public void VerifyModalOpensWhenAddEmployeeButtonIsClicked()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+        }
+
+        // Modal Tests
+
+        [TestMethod]
+        public void VerifyModalDependentsTextIsCorrect() // Verifies
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text);
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text, "Dependents:");
         }
 
         [TestMethod]
@@ -113,40 +145,49 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyModalDependentsTextIsCorrect() // Verifies
+        public void VerifyAddEmployeeModalTitle()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text);
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsTextModal).Text, "Dependents:");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Text, "Add Employee & Their Dependents"); // Not just His and capitalze dependents
         }
 
         [TestMethod]
-        public void VerifyModalOpensWhenAddEmployeeButtonIsClicked()
+        public void VerifyModalSubmitButtonExists()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnSubmitModal")).Displayed);
         }
 
         [TestMethod]
-        public void VerifyJumbotronBannerIsDisplayed() // Verifies page title "Benefits Dashboard" is displayed
+        public void VerifyModalCloseButtonExists()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnCloseModal")).Displayed);
         }
 
         [TestMethod]
-        public void VerifyJumbotronBannerTextIsCorrect() // Verifies page title "Benefits Dashboard" is displayed
+        public void VerifyModalCloseXButtonExists()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
-            //Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.BannerText).Text);
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.JumboBannerText).Text, "Benefits Dashboard");
+            chromeDriver.ClickAddEmployeeButton();
+            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnCloseModalX")).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyModalClosesWhenCloseButtonIsClicked()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            chromeDriver.ClickCloseModalButton();
+            Assert.IsFalse(chromeDriver.FindElement(By.Id("modalTitle")).Displayed);
         }
     }
 }
