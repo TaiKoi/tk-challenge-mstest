@@ -2,7 +2,7 @@
 
 ## Project Description:
 
-Good afternoon and welcome to Ty's Paylocity automation challenge!　:bow:
+Good afternoon and welcome to Ty's Paylocity automation challenge!　:japanese_ogre:
 
 This project handles the End to End automation of the Benefits Dashboard application
 
