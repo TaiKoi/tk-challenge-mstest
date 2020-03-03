@@ -11,138 +11,126 @@ namespace TK_Challenge
     {
         public static IWebDriver chromeDriver, firefoxDriver, edgeDriver;
 
-        [ClassInitialize]
+        [ClassInitialize] // Use TestInitialize to open a fresh window for each test VS one window for the entire test class; TestInitialize would be beneficial if the application has any kind of session persistance
         public static void ClassInitialize(TestContext test)
         {
             var options = new ChromeOptions();
-            options.AddArguments("headed"); // Change argument to "headless" to run without the browser
+            options.AddArguments(BrowserOptions.BrowserVisible); // Change argument to "headless" to run without the browser
             chromeDriver = new ChromeDriver(options);
             //firefoxDriver = new FirefoxDriver();
             //edgeDriver = new EdgeDriver();
             chromeDriver.Manage().Window.Maximize();
         }
 
-        [ClassCleanup]
+        /*[ClassCleanup] 
         public static void ClassCleanup()
         {
             chromeDriver.Close();
             //firefoxDriver.Close();
             //edgeDriver.Close();
-        }
+        }*/
 
         // Landing Tests
         [TestMethod]
-        public void VerifyEditButtonOpensModal()
+        public void VerifyUselessBlueHeaderExists() // Verify useless blue header exists and is useless (also, critical bug, it's not blue)
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.UselessBlueHeader).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyEditButtonOpensModal() // Verify edit button opens modal
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            if (chromeDriver.GetTableRows("employee-table").Length != 0)
+            {
+                chromeDriver.ClickEditButton();
+                Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).Displayed);
+            }
+            else
+            {
+                Assert.Inconclusive("No rows in table to test against");
+            }
+        }
+
+        [TestMethod]
+        public void VerifyEditButtonOpensModalWithCorrectEmployeeInformation() // Verify edit button opens modal with correct employee information
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickEditButton();
+            Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).Text);
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).Text, "Zack"); // Make these dynamic //chromeDriver.GetTableRows(BenefitsDashboardPage.EmployeeTable)[0]);
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).Text, "Siler");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).Text, "1");
+        }
+
+        [TestMethod]
+        public void VerifyEditButtonExists() // Verify Edit buttpm is displayed
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.EditButton).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyDeleteButtonExists() // Verify delete button is displayed
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.DeleteButton).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyEmployeeTableExists() // Verify employee table exists
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.EmployeeTable).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyJumbotronBannerIsDisplayed() // Verify page title "Benefits Dashboard" is displayed
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.JumboBanner).Displayed);
         }
 
         [TestMethod]
-        public void VerifyEditButtonOpensModalWithCorrectEmployeeInformation()
+        public void VerifyJumbotronBannerTextIsCorrect() // Verify page title "Benefits Dashboard" is displayed with correct text
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
-            chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
-        }
-
-        [TestMethod]
-        public void VerifyEditButtonExists()
-        {
-            chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.ValidLogin();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnEdit")).Displayed);
-        }
-
-        [TestMethod]
-        public void VerifyDeleteButtonExists()
-        {
-            chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.ValidLogin();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnDelete")).Displayed);
-        }
-
-        /*[TestMethod]
-        public void VerifyDeleteButton()
-        {
-            chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.Login();
-            chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
-        }*/
-
-        [TestMethod]
-        public void VerifyEmployeeTableExists()
-        {
-            chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.ValidLogin();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("employee-table")).Displayed);
-        }
-
-        [TestMethod]
-        public void VerifyJumbotronBannerIsDisplayed() // Verifies page title "Benefits Dashboard" is displayed
-        {
-            chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.ValidLogin();
-            chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("header")).Displayed);
-        }
-
-        [TestMethod]
-        public void VerifyJumbotronBannerTextIsCorrect() // Verifies page title "Benefits Dashboard" is displayed
-        {
-            chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.ValidLogin();
-            //Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.BannerText).Text);
             Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.JumboBannerText).Text, "Benefits Dashboard");
         }
 
         [TestMethod]
-        public void VerifyModalOpensWhenAddEmployeeButtonIsClicked()
+        public void VerifyModalOpensWhenAddEmployeeButtonIsClicked() // Verify add employee modal opens when Add Employee button is clicked
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).Displayed);
         }
 
         [TestMethod]
-        public void TestMethod()
+        public void VerifyModalOpensBlankWhenAddEmployeeButtonIsClicked() // Verify add employee modal opens with empty input fields when Add Employee button is clicked
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
-
-            string[] columnText = new string[chromeDriver.GetTableHeaderElements("employee-table").Length];
-            int i = 0;
-            foreach (IWebElement column in chromeDriver.GetTableHeaderElements("employee-table"))
-            {
-                Console.WriteLine(columnText[i++] = column.Text);
-            }
-
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table").Length, 9);
+            chromeDriver.ClickAddEmployeeButton();
+            chromeDriver.GetElement(BenefitsDashboardPage.AddEmployeeModal).WaitForDisplayed();
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).Text, "");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).Text, "");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).Text, "");
         }
 
         [TestMethod]
-        public void TestMethod3()
-        {
-            chromeDriver.Url = Navigation.LoginURL;
-            chromeDriver.ValidLogin();
-
-            string[] rowDataText = new string[chromeDriver.GetTableRows("employee-table").Length];
-            int i = 0;
-            foreach (IWebElement column in chromeDriver.GetTableRows("employee-table"))
-            {
-                Console.WriteLine(rowDataText[i++] = column.Text);
-            }
-
-            Assert.AreEqual(chromeDriver.GetTableRows("employee-table").Length, 1);
-        }
-
-        [TestMethod]
-        public void VerifyEmployeeTableHeaderText()
+        public void VerifyEmployeeTableHeaderText() // Verify employee table header exists with correct column titles
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
@@ -167,11 +155,11 @@ namespace TK_Challenge
         }
 
         /*[TestMethod]
-        public void VerifyGrossPayValue()
+        public void VerifyGrossPayValue() // Verify Gross Pay is displayed with correct value
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
-            if(chromeDriver.GetTableRowContent("employee-table").Length != 0)
+            if(chromeDriver.GetTableRows("employee-table").Length != 0)
             {
                 Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[0], 2000);
             }
@@ -182,7 +170,23 @@ namespace TK_Challenge
         }*/
 
         [TestMethod]
-        public void VerifyAddEmployeeToTable()
+        public void VerifyDeleteButtonDeletesEmployeeFromTable() // Verify employee can be deleted from table
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            if (chromeDriver.GetTableRows("employee-table").Length != 0)
+            {
+                chromeDriver.ClickDeleteButton(); // Would need to specify which row to delete based on which delete button was clicked
+                Assert.AreEqual(chromeDriver.GetTableRows("employee-table").Length, 0);
+            }
+            else
+            {
+                Assert.Inconclusive("No rows in table to test against");
+            }
+        }
+
+        [TestMethod]
+        public void VerifyAddEmployeeToTable() // Verify new employee can be added to table
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
@@ -195,7 +199,7 @@ namespace TK_Challenge
         }
 
         [TestMethod] 
-        public void VerifyBenefitCostOfEmployeeWithNoDiscount()
+        public void VerifyBenefitCostOfEmployeeWithNoDiscount() // Verify Benefit Cost is calculated and displayed correctly for employee with no discount 
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
@@ -209,7 +213,7 @@ namespace TK_Challenge
 
         // Modal Tests
         [TestMethod]
-        public void VerifyModalDependentsTextIsCorrect() // Verifies
+        public void VerifyModalDependentsTextIsCorrect() // Verify Dependents text is displayed correctly in modal
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
@@ -219,7 +223,7 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyModalFirstNameTextIsCorrect() // Verifies
+        public void VerifyModalFirstNameTextIsCorrect() // Verify First Name text is displayed correctly in modal
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
@@ -229,7 +233,7 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyModalLastNameTextIsCorrect() // Verifies
+        public void VerifyModalLastNameTextIsCorrect() // Verify Last Name text is displayed correctly in modal
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
@@ -239,49 +243,59 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyAddEmployeeModalTitle()
+        public void VerifyAddEmployeeModalTitle() // Verify modal title is correct
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Text, "Add Employee & Their Dependents"); // Not just His and capitalze dependents
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Text, "Add Employee & Employee Dependents");
         }
 
         [TestMethod]
-        public void VerifyModalSubmitButtonExists()
+        public void VerifyModalSubmitButtonExists() // Verify modal submit button is displayed when modal is opened 
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnSubmitModal")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.SubmitButton).Displayed);
         }
 
         [TestMethod]
-        public void VerifyModalCloseButtonExists()
+        public void VerifyModalCloseButtonExists() // Verify modal close button is displayed when modal is opened 
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnCloseModal")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.CloseButton).Displayed);
         }
 
         [TestMethod]
-        public void VerifyModalCloseXButtonExists()
+        public void VerifyModalCloseXButtonExists() // Verify modal close X button is displayed when modal is opened 
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnCloseModalX")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(BenefitsDashboardPage.CloseXButton).Displayed);
         }
 
         [TestMethod]
-        public void VerifyModalClosesWhenCloseButtonIsClicked()
+        public void VerifyModalClosesWhenCloseButtonIsClicked() // Verify modal closes when close button is clicked
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
             chromeDriver.ClickCloseModalButton();
-            Assert.IsFalse(chromeDriver.FindElement(By.Id("modalTitle")).Displayed);
+            Assert.IsFalse(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Displayed);
+        }
+
+        [TestMethod]
+        public void VerifyModalClosesWhenCloseXButtonIsClicked() // Verify modal closes when close X button is clicked
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            chromeDriver.ClickCloseModalButton();
+            Assert.IsFalse(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Displayed);
         }
     }
 }

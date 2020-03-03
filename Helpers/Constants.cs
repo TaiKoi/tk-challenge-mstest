@@ -1,5 +1,10 @@
 ﻿namespace TK_Challenge
 {
+    public static class BrowserOptions
+    {
+        public const string BrowserVisible = "headed"; // Change to "headless" to run without the browser OR "headed" to run with browser
+    }
+    
     public static class Navigation
     {
         public const string LoginURL = "file:///C:/Users/smadd/OneDrive/Desktop/tk-challenge-mstest/login.html";

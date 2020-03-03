@@ -14,6 +14,7 @@ namespace TK_Challenge.Pages
         public static string LoginButton = "[id='btnLogin']";
         public static string CopyrightFooter = "[id='footer']";
         public static string InvalidLoginBanner = "[id='validation-errors']";
+        public static string UselessBlueHeader = "[id='uselessBlueHeader']";
 
         // Page Actions
         public static void ValidLogin(this IWebDriver driver) // Logs in the test user

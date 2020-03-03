@@ -24,8 +24,7 @@ namespace TK_Challenge.Pages
         public static string EmployeeTable = "[id='employee-table']";
         public static string EmployeeTableHeader = "[id='tableHead']";
         public static string EmployeeTableBody = "[id='tableBody']";
-
-        // Create a table object or interface to store all the records from the employee table.
+        public static string UselessBlueHeader = "[id='uselessBlueHeader']";
 
         // Page Actions
         public static void ClickAddEmployeeButton(this IWebDriver driver)
@@ -41,8 +40,6 @@ namespace TK_Challenge.Pages
 
         public static void ClickEditButton(this IWebDriver driver)
         {
-            //driver.ExecuteJavaScript<string>("return employee.js");
-
             driver.GetElement(EditButton).Click();
             driver.GetElement(AddEmployeeModal).WaitForDisplayed();
         }
@@ -54,13 +51,11 @@ namespace TK_Challenge.Pages
         public static void ClickCloseModalButton(this IWebDriver driver)
         {
             driver.GetElement(CloseButton).Click();
-            //driver.GetElement(JumboBanner).WaitForDisplayed();
         }
 
         public static void ClickCloseModalXButton(this IWebDriver driver)
         {
             driver.GetElement(CloseXButton).Click();
-            //driver.GetElement(JumboBanner).WaitForDisplayed();
         }
     }
 }

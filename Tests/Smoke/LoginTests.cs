@@ -1,23 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Edge;
 using TK_Challenge.Pages;
-using System;
 
 namespace TK_Challenge
 {
     [TestClass]
     public class LoginTests
     {
-        public static IWebDriver chromeDriver, firefoxDriver, edgeDriver;
+        public static IWebDriver chromeDriver, firefoxDriver, edgeDriver; // TODO: Setup tests to run in parallel on multiple browsers
 
-        [ClassInitialize]
+        [ClassInitialize] // Use TestInitialize to open a fresh window for each test VS one window for the entire test class; TestInitialize would be beneficial if the application has any kind of session persistance
         public static void ClassInitialize(TestContext test)
         {
             var options = new ChromeOptions();
-            options.AddArguments("headed"); // Change argument to "headless" to run without the browser
+            options.AddArguments(BrowserOptions.BrowserVisible); 
             chromeDriver = new ChromeDriver(options);
             //firefoxDriver = new FirefoxDriver();
             //edgeDriver = new EdgeDriver();
@@ -33,6 +30,14 @@ namespace TK_Challenge
         }
 
         [TestMethod]
+        public void VerifyUselessBlueHeaderExists() // Verify useless blue header exists and is useless (also, critical bug, it's not blue)
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            Assert.IsTrue(chromeDriver.GetElement(LoginPage.UselessBlueHeader).Displayed);
+        }
+
+        [TestMethod] // Verify user is logged in when using valid credentials
         public void VerifyLoginUserWhenCredentialsAreValid()
         {
             chromeDriver.Url = Navigation.LoginURL;  
@@ -40,32 +45,31 @@ namespace TK_Challenge
             Assert.AreEqual(Navigation.DashboardURL, chromeDriver.Url);
         }
 
-        [TestMethod]
+        [TestMethod] // Verify login card is displayed
         public void VerifyLoginCardIsDisplayed()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("loginCard")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(LoginPage.LoginCard).Displayed);
         }
 
-        [TestMethod]
+        [TestMethod] // Verify Paylocity logo is displayed
         public void VerifyPaylocityLogoIsDisplayed()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("paylocityLogo")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(LoginPage.LocityLogo).Displayed);
         }
 
-        [TestMethod]
+        [TestMethod] // Verify Username field text is displayed correctly
         public void VerifyUsernameTextIsDisplayedCorrectly()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            //Console.WriteLine(chromeDriver.GetElement(LoginPage.UsernameText).Text);
             Assert.AreEqual(chromeDriver.GetElement(LoginPage.UsernameText).Text, "Username");
         }
 
-        [TestMethod]
+        [TestMethod] // Verify Password field text is displayed correctly
         public void VerifyPasswordTextIsDisplayedCorrectly()
         {
             chromeDriver.Url = Navigation.LoginURL;
@@ -74,44 +78,44 @@ namespace TK_Challenge
             Assert.AreEqual(chromeDriver.GetElement(LoginPage.PasswordText).Text, "Password");
         }
 
-        [TestMethod]
+        [TestMethod] // Verify footer is displayed
         public void VerifyPaylocityFooterIsDisplayed()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("footer")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(LoginPage.CopyrightFooter).Displayed);
         }
 
-        [TestMethod]
+        [TestMethod]  // Verify login button exists
         public void VerifyLoginButtonExists()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.GetElement(LoginPage.LoginButton).WaitForDisplayed();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("btnLogin")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(LoginPage.LoginButton).Displayed);
         }
 
-        [TestMethod]
+        [TestMethod] // Verify validation error message is displayed for invalid username & password
         public void VerifyInvalidLoginBannerIsDisplayedWhenCredentialsAreInvalid()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.InvalidLogin();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("validation-errors")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(LoginPage.InvalidLoginBanner).Displayed);
         }
 
-        [TestMethod]
+        [TestMethod] // Verify validation error message is displayed for valid username & invalid password
         public void VerifyInvalidLoginBannerIsDisplayedWhenUsernameIsValidAndPasswordIsInvalid()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.InvalidPasswordLogin();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("validation-errors")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(LoginPage.InvalidLoginBanner).Displayed);
         }
 
-        [TestMethod]
+        [TestMethod] // Verify validation error message is displayed for invalid username & valid password
         public void VerifyInvalidLoginBannerIsDisplayedWhenPasswordIsValidAndUsernameIsInvalid()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.InvalidPasswordLogin();
-            Assert.IsTrue(chromeDriver.FindElement(By.Id("validation-errors")).Displayed);
+            Assert.IsTrue(chromeDriver.GetElement(LoginPage.InvalidLoginBanner).Displayed);
         }
     }
 }

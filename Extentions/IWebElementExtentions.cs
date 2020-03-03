@@ -1,14 +1,10 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
 
 namespace TK_Challenge
 {
-    // Must be a static class
     public static class IWebElementExtensions
     {
-        // Extension Method
-        // Extension methods must be static
         public static void WaitForDisplayed(this IWebElement element)
         {
             // 30 ms = 3 seconds

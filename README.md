@@ -30,11 +30,11 @@ Within the package manager console in Visual Studio, enter the following command
 
 [Selenium.WebDriver](https://www.nuget.org/packages/Selenium.WebDriver/3.141.0?_src=template)
 
-    `PM> Install-Package Selenium.WebDriver -Version 3.141.0`
+    PM> Install-Package Selenium.WebDriver -Version 3.141.0
 
 [Selenium.WebDriver.ChromeDriver](https://www.nuget.org/packages/Selenium.WebDriver.ChromeDriver/80.0.3987.10600?_src=template)
 
-    `PM> Install-Package Selenium.WebDriver.ChromeDriver -Version 80.0.3987.10600`
+    PM> Install-Package Selenium.WebDriver.ChromeDriver -Version 80.0.3987.10600
 
 ## Running Tests:
 
