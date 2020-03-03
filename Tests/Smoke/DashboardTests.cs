@@ -31,7 +31,6 @@ namespace TK_Challenge
         }
 
         // Landing Tests
-
         [TestMethod]
         public void VerifyEditButtonOpensModal()
         {
@@ -132,14 +131,14 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
 
-            string[] rowDataText = new string[chromeDriver.GetTableRowContent("employee-table").Length];
+            string[] rowDataText = new string[chromeDriver.GetTableRows("employee-table").Length];
             int i = 0;
-            foreach (IWebElement column in chromeDriver.GetTableRowContent("employee-table"))
+            foreach (IWebElement column in chromeDriver.GetTableRows("employee-table"))
             {
                 Console.WriteLine(rowDataText[i++] = column.Text);
             }
 
-            Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table").Length, 1);
+            Assert.AreEqual(chromeDriver.GetTableRows("employee-table").Length, 1);
         }
 
         [TestMethod]
@@ -167,19 +166,45 @@ namespace TK_Challenge
             Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[8].Text, "Actions");
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void VerifyGrossPayValue()
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             if(chromeDriver.GetTableRowContent("employee-table").Length != 0)
             {
-                Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[0]., 2000);
+                Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[0], 2000);
             }
             else
             {
                 Assert.Inconclusive("No rows in table to test against");
             }
+        }*/
+
+        [TestMethod]
+        public void VerifyAddEmployeeToTable()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).SendKeys(PersonNoDiscount.FirstName);
+            chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).SendKeys(PersonNoDiscount.LastName);
+            chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).SendKeys(PersonNoDiscount.Dependents.ToString());
+            chromeDriver.ClickSubmitEmployeeButton();
+            Assert.AreEqual(chromeDriver.GetTableRows("employee-table").Length, 2);
+        }
+
+        [TestMethod] 
+        public void VerifyBenefitCostOfEmployeeWithNoDiscount()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).SendKeys(PersonNoDiscount.FirstName);
+            chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).SendKeys(PersonNoDiscount.LastName);
+            chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).SendKeys(PersonNoDiscount.Dependents.ToString());
+            chromeDriver.ClickSubmitEmployeeButton();
+            //Assert.AreEqual(chromeDriver.GetTableRows("employee-table")[1][index of benefit cost column].value in benefit cost column, Finances.Salary);
         }
 
         // Modal Tests

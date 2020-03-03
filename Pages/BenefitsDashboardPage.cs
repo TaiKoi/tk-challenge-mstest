@@ -10,11 +10,14 @@ namespace TK_Challenge.Pages
         public static string AddEmployeeButton = "[id='btnAddEmployee']";
         public static string AddEmployeeModal = "[id='addEmployeeModal']";
         public static string ModalTitle = "[id='modalTitle']";
-        public static string EditButton = "[id='btnEdit']";
-        public static string DeleteButton = "[id='btnDelete']";
         public static string FirstNameTextModal = "[id='firstNameTextModal']";
         public static string LastNameTextModal = "[id='lastNameTextModal']";
         public static string DependentsTextModal = "[id='dependentsTextModal']";
+        public static string FirstNameFieldModal = "[id='firstNameFieldModal']";
+        public static string LastNameFieldModal = "[id='lastNameFieldModal']";
+        public static string DependentsFieldModal = "[id='dependentsFieldModal']";
+        public static string EditButton = "[id='btnEdit']";
+        public static string DeleteButton = "[id='btnDelete']";
         public static string SubmitButton = "[id='btnSubmitModal']";
         public static string CloseButton = "[id='btnCloseModal']";
         public static string CloseXButton = "[id='btnCloseModalX']";
@@ -29,6 +32,11 @@ namespace TK_Challenge.Pages
         {
             driver.GetElement(AddEmployeeButton).Click();
             driver.GetElement(AddEmployeeModal).WaitForDisplayed();
+        }
+
+        public static void ClickSubmitEmployeeButton(this IWebDriver driver)
+        {
+            driver.GetElement(SubmitButton).Click();
         }
 
         public static void ClickEditButton(this IWebDriver driver)

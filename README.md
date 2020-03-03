@@ -1,4 +1,4 @@
-# tk-challenge-mstest
+# Benefits Dashboard Automation
 
 This project uses the following NuGet Packages:
 
@@ -7,9 +7,8 @@ Selenium.Support
 Selenium.WebDriver.ChromeDriver 
 Selenium.Firefox.WebDriver
 Selenium.WebDriver.MicrosoftDriver
-NUnit
-NUnit3TestAdapter
 coverlet.collector
 Microsoft.NET.Test.Sdk
 MSTest.TestAdapter
 MSTest.TestFramework
+
