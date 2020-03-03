@@ -17,8 +17,6 @@ This project handles the End to End automation of the Benefits Dashboard applica
 
 * Selenium.WebDriver
 * Selenium.SupportSelenium.WebDriver.ChromeDriver 
-* Selenium.Firefox.WebDriver
-* Selenium.WebDriver.MicrosoftDriver
 * coverlet.collector
 * Microsoft.NET.Test.Sdk
 * MSTest.TestAdapter
@@ -28,18 +26,22 @@ This project handles the End to End automation of the Benefits Dashboard applica
 
 **Install the above Nuget Packages**
 
-Within the package manager console on Visual Studio, enter the following commands:
+Within the package manager console in Visual Studio, enter the following commands:
 
-* Selenium.WebDriver
+[Selenium.WebDriver](https://www.nuget.org/packages/Selenium.WebDriver/3.141.0?_src=template)
 
-    PM> Install-Package Selenium.WebDriver.ChromeDriver -Version 80.0.3987.10600
+    `PM> Install-Package Selenium.WebDriver -Version 3.141.0`
+
+[Selenium.WebDriver.ChromeDriver](https://www.nuget.org/packages/Selenium.WebDriver.ChromeDriver/80.0.3987.10600?_src=template)
+
+    `PM> Install-Package Selenium.WebDriver.ChromeDriver -Version 80.0.3987.10600`
 
 ## Running Tests:
 
-```python
-import foobar
+**Local**
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
-```
+`npm run qa:local`
+
+**Test**
+
+`npm run qa:e2e`
