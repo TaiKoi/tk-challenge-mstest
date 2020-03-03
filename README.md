@@ -2,9 +2,9 @@
 
 ## Built With:
 
-* **C#**
-
-* **MSTest**
+* [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
+* [MSTest](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest)
+* [Selenium](https://www.selenium.dev/)
 
 
 **This project uses the following NuGet Packages:**
