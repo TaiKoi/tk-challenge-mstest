@@ -3,6 +3,7 @@
 ## Project Description:
 
 Good afternoon and welcome to Ty's Paylocity automation challenge!　:bow:
+
 This project handles the End to End automation of the Benefits Dashboard application
 
 ## Built With:
