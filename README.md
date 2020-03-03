@@ -1,4 +1,9 @@
-# Benefits Dashboard Automation
+﻿# Benefits Dashboard Automation
+
+## Project Description:
+
+Good afternoon and welcome to Ty's Paylocity automation challenge!　:bow:
+This project handles the End to End automation of the Benefits Dashboard application
 
 ## Built With:
 
@@ -9,18 +14,14 @@
 
 **This project uses the following NuGet Packages:**
 
-- Selenium.WebDriver
-- Selenium.SupportSelenium.WebDriver.ChromeDriver 
-- Selenium.Firefox.WebDriver
-- Selenium.WebDriver.MicrosoftDriver
-- coverlet.collector
-- Microsoft.NET.Test.Sdk
-- MSTest.TestAdapter
-- MSTest.TestFramework
-
-## Project Description:
-
-This project handles the End to End automation of the Benefits Dashboard application
+* Selenium.WebDriver
+* Selenium.SupportSelenium.WebDriver.ChromeDriver 
+* Selenium.Firefox.WebDriver
+* Selenium.WebDriver.MicrosoftDriver
+* coverlet.collector
+* Microsoft.NET.Test.Sdk
+* MSTest.TestAdapter
+* MSTest.TestFramework
 
 ## Installation:
 
