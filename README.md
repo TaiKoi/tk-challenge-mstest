@@ -3,18 +3,26 @@
 ## Built With:
 
 * **C#**
+
 * **MSTest**
 
 
 **This project uses the following NuGet Packages:**
 
 * Selenium.WebDriver
+
 * Selenium.SupportSelenium.WebDriver.ChromeDriver 
+
 * Selenium.Firefox.WebDriver
+
 * Selenium.WebDriver.MicrosoftDriver
+
 * coverlet.collector
+
 * Microsoft.NET.Test.Sdk
+
 * MSTest.TestAdapter
+
 * MSTest.TestFramework
 
 ## Project Description:
