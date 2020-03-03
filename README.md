@@ -26,11 +26,13 @@ This project handles the End to End automation of the Benefits Dashboard applica
 
 ## Installation:
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+**Install the above Nuget Packages**
 
-```bash
-pip install foobar
-```
+Within the package manager console on Visual Studio, enter the following commands:
+
+* Selenium.WebDriver
+
+    PM> Install-Package Selenium.WebDriver.ChromeDriver -Version 80.0.3987.10600
 
 ## Running Tests:
 
