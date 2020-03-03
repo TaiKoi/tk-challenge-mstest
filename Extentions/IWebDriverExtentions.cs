@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TK_Challenge.Pages
 {
@@ -23,7 +25,52 @@ namespace TK_Challenge.Pages
             }
 
             throw new Exception("Element Not Found");
+        }
 
+        public static IWebElement[] GetTableHeaderElements(this IWebDriver driver, string tableName)
+        {
+            IWebElement tableElement = driver.FindElement(By.Id(tableName));
+            IWebElement tableHeader = tableElement.FindElement(By.Id("tableHead"));
+            IList<IWebElement> tableHeaderColumns = tableHeader.FindElements(By.TagName("th"));
+
+            IWebElement[] headerColumns = tableHeaderColumns.ToArray();
+
+            return headerColumns;
+        }
+
+        public static IWebElement[] GetTableRows(this IWebDriver driver, string tableName)
+        {
+            IWebElement tableElement = driver.FindElement(By.Id(tableName));
+            IWebElement tableBody = tableElement.FindElement(By.Id("tableBody"));
+            IList<IWebElement> tableRows = tableBody.FindElements(By.TagName("tr"));
+            IList<IWebElement> rowTD;
+            foreach (IWebElement row in tableRows)
+            {
+                rowTD = row.FindElements(By.TagName("td"));
+            }
+            IWebElement[] rowData = tableRows.ToArray();
+
+            return rowData;
+        }
+
+        public static IWebElement[] GetTableRowContent(this IWebDriver driver, string tableName)
+        {
+            IWebElement tableElement = driver.FindElement(By.Id(tableName));
+            IWebElement tableBody = tableElement.FindElement(By.Id("tableBody"));
+            IList<IWebElement> tableRows = tableBody.FindElements(By.TagName("tr"));
+            IList<IWebElement> rowTD;
+            IWebElement[] rowDatas = new IWebElement[0];
+            foreach (IWebElement row in tableRows)
+            {
+                rowTD = row.FindElements(By.TagName("td"));
+                /*foreach (IWebElement column in rowTD)
+                {
+                    rowColumn = column.FindElements
+                }*/
+  
+            }
+            IWebElement[] rowDatas = rowTD.ToArray();
+            return rowDatas;
         }
     }
 }

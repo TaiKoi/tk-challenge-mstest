@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.Extensions;
 
 namespace TK_Challenge.Pages
 {
@@ -10,7 +9,6 @@ namespace TK_Challenge.Pages
         public static string JumboBanner = "[id='header']";
         public static string AddEmployeeButton = "[id='btnAddEmployee']";
         public static string AddEmployeeModal = "[id='addEmployeeModal']";
-        public static string EmployeeTable = "[id='employee-table']";
         public static string ModalTitle = "[id='modalTitle']";
         public static string EditButton = "[id='btnEdit']";
         public static string DeleteButton = "[id='btnDelete']";
@@ -20,8 +18,11 @@ namespace TK_Challenge.Pages
         public static string SubmitButton = "[id='btnSubmitModal']";
         public static string CloseButton = "[id='btnCloseModal']";
         public static string CloseXButton = "[id='btnCloseModalX']";
+        public static string EmployeeTable = "[id='employee-table']";
+        public static string EmployeeTableHeader = "[id='tableHead']";
+        public static string EmployeeTableBody = "[id='tableBody']";
 
-        // Create a table object or interface to store all the records from the employee table. Then 
+        // Create a table object or interface to store all the records from the employee table.
 
         // Page Actions
         public static void ClickAddEmployeeButton(this IWebDriver driver)

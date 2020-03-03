@@ -1,10 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Edge;
-using TK_Challenge.Pages;
 using System;
+using TK_Challenge.Pages;
 
 namespace TK_Challenge
 {
@@ -112,8 +110,79 @@ namespace TK_Challenge
             Assert.IsTrue(chromeDriver.FindElement(By.Id("addEmployeeModal")).Displayed);
         }
 
-        // Modal Tests
+        [TestMethod]
+        public void TestMethod()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
 
+            string[] columnText = new string[chromeDriver.GetTableHeaderElements("employee-table").Length];
+            int i = 0;
+            foreach (IWebElement column in chromeDriver.GetTableHeaderElements("employee-table"))
+            {
+                Console.WriteLine(columnText[i++] = column.Text);
+            }
+
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table").Length, 9);
+        }
+
+        [TestMethod]
+        public void TestMethod3()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+
+            string[] rowDataText = new string[chromeDriver.GetTableRowContent("employee-table").Length];
+            int i = 0;
+            foreach (IWebElement column in chromeDriver.GetTableRowContent("employee-table"))
+            {
+                Console.WriteLine(rowDataText[i++] = column.Text);
+            }
+
+            Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table").Length, 1);
+        }
+
+        [TestMethod]
+        public void VerifyEmployeeTableHeaderText()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.GetTableHeaderElements("employee-table");
+
+            string[] columnText = new string[chromeDriver.GetTableHeaderElements("employee-table").Length];
+            int i = 0;
+            foreach (IWebElement column in chromeDriver.GetTableHeaderElements("employee-table"))
+            {
+                Console.WriteLine(columnText[i++] = column.Text);
+            }
+
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[0].Text, "ID");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[1].Text, "Last Name");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[2].Text, "First Name");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[3].Text, "Salary");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[4].Text, "Dependents");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[5].Text, "Gross Pay");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[6].Text, "Benefit Cost");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[7].Text, "Net Pay");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[8].Text, "Actions");
+        }
+
+        [TestMethod]
+        public void VerifyGrossPayValue()
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            if(chromeDriver.GetTableRowContent("employee-table").Length != 0)
+            {
+                Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[0]., 2000);
+            }
+            else
+            {
+                Assert.Inconclusive("No rows in table to test against");
+            }
+        }
+
+        // Modal Tests
         [TestMethod]
         public void VerifyModalDependentsTextIsCorrect() // Verifies
         {
