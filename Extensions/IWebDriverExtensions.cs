@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace TK_Challenge.Pages
 {
-    public static class IWebDriverExtentions
+    public static class IWebDriverExtensions
     {
         public static void Wait(int delay = 100)
         {
