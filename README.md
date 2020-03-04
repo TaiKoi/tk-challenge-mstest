@@ -38,10 +38,5 @@ Within the package manager console in Visual Studio, enter the following command
 
 ## Running Tests:
 
-**Local**
-
-`npm run qa:local`
-
-**Test**
-
-`npm run qa:e2e`
+In the terminal in the project folder, run:
+`dotnet test`
