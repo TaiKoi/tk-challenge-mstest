@@ -7,11 +7,6 @@ namespace TK_Challenge.Pages
 {
     public static class IWebDriverExtensions
     {
-        public static void Wait(int delay = 100)
-        {
-            System.Threading.Thread.Sleep(delay);
-        }
-
         public static IWebElement GetElement(this IWebDriver driver, string cssSelector)
         {
             // 30 ms = 3 seconds
