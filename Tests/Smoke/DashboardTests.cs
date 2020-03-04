@@ -22,13 +22,13 @@ namespace TK_Challenge
             chromeDriver.Manage().Window.Maximize();
         }
 
-        /*[ClassCleanup] 
+        [ClassCleanup]
         public static void ClassCleanup()
         {
             chromeDriver.Close();
             //firefoxDriver.Close();
             //edgeDriver.Close();
-        }*/
+        }
 
         // Landing Tests
         [TestMethod]
@@ -284,7 +284,9 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
+            System.Threading.Thread.Sleep(500);
             chromeDriver.ClickCloseModalButton();
+            System.Threading.Thread.Sleep(500);
             Assert.IsFalse(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Displayed);
         }
 
@@ -294,7 +296,9 @@ namespace TK_Challenge
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
             chromeDriver.ClickAddEmployeeButton();
+            System.Threading.Thread.Sleep(500);
             chromeDriver.ClickCloseModalButton();
+            System.Threading.Thread.Sleep(500);
             Assert.IsFalse(chromeDriver.GetElement(BenefitsDashboardPage.ModalTitle).Displayed);
         }
     }

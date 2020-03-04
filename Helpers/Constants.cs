@@ -1,4 +1,6 @@
-﻿namespace TK_Challenge
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace TK_Challenge
 {
     public static class BrowserOptions
     {
