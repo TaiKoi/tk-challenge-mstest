@@ -190,12 +190,13 @@ namespace TK_Challenge
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
+            int rowCount = chromeDriver.GetTableRows("employee-table").Length;
             chromeDriver.ClickAddEmployeeButton();
             chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).SendKeys(PersonNoDiscount.FirstName);
             chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).SendKeys(PersonNoDiscount.LastName);
             chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).SendKeys(PersonNoDiscount.Dependents.ToString());
             chromeDriver.ClickSubmitEmployeeButton();
-            Assert.AreEqual(chromeDriver.GetTableRows("employee-table").Length, 2);
+            Assert.AreEqual(chromeDriver.GetTableRows("employee-table").Length, rowCount + 1);
         }
 
         [TestMethod] 
