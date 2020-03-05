@@ -68,7 +68,7 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyEditButtonExists() // Verify Edit buttpm is displayed
+        public void VerifyEditButtonExists() // Verify Edit button is displayed
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
