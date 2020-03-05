@@ -68,7 +68,7 @@ namespace TK_Challenge
         }
 
         [TestMethod]
-        public void VerifyEditButtonExists() // Verify Edit buttpm is displayed
+        public void VerifyEditButtonExists() // Verify Edit button is displayed
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
@@ -143,31 +143,31 @@ namespace TK_Challenge
                 Console.WriteLine(columnText[i++] = column.Text);
             }
 
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[0].Text, "ID");
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[1].Text, "Last Name");
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[2].Text, "First Name");
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[3].Text, "Salary");
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[4].Text, "Dependents");
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[5].Text, "Gross Pay");
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[6].Text, "Benefit Cost");
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[7].Text, "Net Pay");
-            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[8].Text, "Actions");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.ID].Text, "ID");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.LastName].Text, "Last Name");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.FirstName].Text, "First Name");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.Salary].Text, "Salary");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.Dependents].Text, "Dependents");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.GrossPay].Text, "Gross Pay");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.BenefitCost].Text, "Benefit Cost");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.NetPay].Text, "Net Pay");
+            Assert.AreEqual(chromeDriver.GetTableHeaderElements("employee-table")[TableColumns.Actions].Text, "Actions");
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void VerifyGrossPayValue() // Verify Gross Pay is displayed with correct value
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
-            if(chromeDriver.GetTableRows("employee-table").Length != 0)
+            if (chromeDriver.GetTableRows("employee-table").Length != 0)
             {
-                Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[0], 2000);
+                Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[TableColumns.GrossPay].Text, Finances.BiWeeklyPaycheck.ToString());
             }
             else
             {
                 Assert.Inconclusive("No rows in table to test against");
             }
-        }*/
+        }
 
         [TestMethod]
         public void VerifyDeleteButtonDeletesEmployeeFromTable() // Verify employee can be deleted from table
@@ -199,7 +199,7 @@ namespace TK_Challenge
         }
 
         [TestMethod] 
-        public void VerifyBenefitCostOfEmployeeWithNoDiscount() // Verify Benefit Cost is calculated and displayed correctly for employee with no discount 
+        public void VerifyBenefitCostOfEmployeeWithNoDiscount() // Verify Benefit Cost is calculated and displayed correctly for employee with no discount and no dependents
         {
             chromeDriver.Url = Navigation.LoginURL;
             chromeDriver.ValidLogin();
@@ -208,7 +208,46 @@ namespace TK_Challenge
             chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).SendKeys(PersonNoDiscount.LastName);
             chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).SendKeys(PersonNoDiscount.Dependents.ToString());
             chromeDriver.ClickSubmitEmployeeButton();
-            //Assert.AreEqual(chromeDriver.GetTableRows("employee-table")[1][index of benefit cost column].value in benefit cost column, Finances.Salary);
+            Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[TableColumns.BenefitCost].Text, PersonNoDiscount.BenefitCost.ToString("0.00"));
+        }
+
+        [TestMethod]
+        public void VerifyBenefitCostOfEmployeeWithDiscount() // Verify Benefit Cost is calculated and displayed correctly for employee with discount and no dependents
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).SendKeys(PersonWithDiscount.FirstName);
+            chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).SendKeys(PersonWithDiscount.LastName);
+            chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).SendKeys(PersonWithDiscount.Dependents.ToString());
+            chromeDriver.ClickSubmitEmployeeButton();
+            Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[TableColumns.BenefitCost].Text, PersonWithDiscount.BenefitCost.ToString("0.00"));
+        }
+
+        [TestMethod]
+        public void VerifyBenefitCostOfEmployeeWithDependentsAndNoDiscount() // Verify Benefit Cost is calculated and displayed correctly for employee with no discount and with dependents
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).SendKeys(PersonNoDiscountAndDependents.FirstName);
+            chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).SendKeys(PersonNoDiscountAndDependents.LastName);
+            chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).SendKeys(PersonNoDiscountAndDependents.Dependents.ToString());
+            chromeDriver.ClickSubmitEmployeeButton();
+            Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[TableColumns.BenefitCost].Text, PersonNoDiscountAndDependents.BenefitCost.ToString("0.00"));
+        }
+
+        [TestMethod]
+        public void VerifyBenefitCostOfEmployeeWithDependentsAndDiscount() // Verify Benefit Cost is calculated and displayed correctly for employee with discount and with dependents
+        {
+            chromeDriver.Url = Navigation.LoginURL;
+            chromeDriver.ValidLogin();
+            chromeDriver.ClickAddEmployeeButton();
+            chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).SendKeys(PersonWithDiscountAndDependents.FirstName);
+            chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).SendKeys(PersonWithDiscountAndDependents.LastName);
+            chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).SendKeys(PersonWithDiscountAndDependents.Dependents.ToString());
+            chromeDriver.ClickSubmitEmployeeButton();
+            Assert.AreEqual(chromeDriver.GetTableRowContent("employee-table")[TableColumns.BenefitCost].Text, PersonWithDiscountAndDependents.BenefitCost.ToString("0.00"));
         }
 
         // Modal Tests
