@@ -62,9 +62,9 @@ namespace TK_Challenge
             chromeDriver.ValidLogin();
             chromeDriver.ClickEditButton();
             Console.WriteLine(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).Text);
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).Text, "Zack"); // Make these dynamic //chromeDriver.GetTableRows(BenefitsDashboardPage.EmployeeTable)[0]);
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).Text, "Siler");
-            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).Text, "1");
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.FirstNameFieldModal).Text, chromeDriver.GetTableRowContent("employee-table")[TableColumns.FirstName].Text);
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.LastNameFieldModal).Text, chromeDriver.GetTableRowContent("employee-table")[TableColumns.LastName].Text);
+            Assert.AreEqual(chromeDriver.GetElement(BenefitsDashboardPage.DependentsFieldModal).Text, chromeDriver.GetTableRowContent("employee-table")[TableColumns.Dependents].Text);
         }
 
         [TestMethod]
